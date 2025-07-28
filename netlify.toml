@@ -42,11 +42,15 @@
   status = 200
 
 # SPA fallback (if you later add client-side routing)
+#[[redirects]]
+#  from = "/*"
+#  to = "/index.html"
+ # status = 200
+ # conditions = {Role = ["admin"]}
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  conditions = {Role = ["admin"]}
 
 # Custom error pages
 [[redirects]]
