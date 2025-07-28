@@ -1,0 +1,40 @@
+{
+  "name": "quiz-master-netlify",
+  "version": "1.0.0",
+  "description": "Modern Quiz Master application built with Netlify Functions and PostgreSQL",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step required for static HTML'",
+    "deploy": "netlify deploy --prod",
+    "setup": "node scripts/setup.js",
+    "seed": "node scripts/seed.js"
+  },
+  "keywords": [
+    "quiz",
+    "netlify",
+    "jamstack",
+    "postgresql",
+    "real-time"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.15.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/quiz-master-netlify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/quiz-master-netlify/issues"
+  },
+  "homepage": "https://github.com/yourusername/quiz-master-netlify#readme"
+}

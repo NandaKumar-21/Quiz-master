@@ -1,0 +1,55 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["pg"]
+
+# Environment variables that should be set in Netlify dashboard:
+# NETLIFY_DATABASE_URL - Your Netlify DB connection string (auto-set)
+# HOST_PASSWORD - Host login password (default: admin123)
+
+# Optional: Force specific region for better performance
+[functions."*"]
+  region = "us-east-2"
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Headers for static assets (caching)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Headers for API functions (no caching)
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Redirects for cleaner URLs (optional)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# SPA fallback (if you later add client-side routing)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+
+# Custom error pages
+[[redirects]]
+  from = "/404"
+  to = "/index.html"
+  status = 404
